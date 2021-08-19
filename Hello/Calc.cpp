@@ -37,14 +37,12 @@ void Calculator::pushNumber(const int i)
 
 void Calculator::pushOp(const Ops p)
 {
-	if (previous != std::nullopt) {
-		calculate();
-	}
-	else {
-		if (!current.empty()) {
+	if (op == std::nullopt) {
+		if (previous != std::nullopt) {
+			calculate();
+		} else {
 			previous = vecToInt(current, neg);
-			std::vector<int> tmp;
-			current = tmp;
+			current = { 0 };
 		}
 	}
 	op = p;
@@ -90,12 +88,12 @@ void Calculator::clear()
 {
 	previous = std::nullopt;
 	op = std::nullopt;
-	current.clear();
+	current = { 0 };
 }
 
 long vecToInt(const std::vector<int>& v, bool neg)
 {
-	if (v.size() == 0)
+	if (v.empty())
 		return 0;
 
 	auto pw = [](int x) -> long {
