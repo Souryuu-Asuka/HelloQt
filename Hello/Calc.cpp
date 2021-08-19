@@ -19,8 +19,7 @@ std::string showOps(Ops op)
 
 Calculator::Calculator()
 {
-	std::vector<int> x;
-	current = x;
+	current = { 0 };
 	previous = std::nullopt;
 	op = std::nullopt;
 	neg = false;
@@ -42,7 +41,7 @@ void Calculator::pushOp(const Ops p)
 		calculate();
 	}
 	else {
-		if (op != std::nullopt) {
+		if (!current.empty()) {
 			previous = vecToInt(current, neg);
 			std::vector<int> tmp;
 			current = tmp;
