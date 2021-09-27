@@ -68,7 +68,9 @@ void Calculator::calculate()
 		result = result * previous.value();
 		break;
 	case Ops::Div:
-		result = previous.value() / result;
+		// possible divide by zero !
+		if (result != 0)
+			result = previous.value() / result;
 		break;
 	}
 
